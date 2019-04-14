@@ -10,8 +10,8 @@ const INITIAL_STATE: StateType = {
 }
 
 // Definities van de mogelijke acties
-type IncrementAction = { type: 'increment' }
-type DecrementAction = { type: 'decrement' }
+type IncrementAction = { type: 'increment', payload: number }
+type DecrementAction = { type: 'decrement', payload: number }
 
 type ActionType = IncrementAction | DecrementAction
 
@@ -22,12 +22,12 @@ const store = createStore(
       case 'increment':
         return {
           ...state,
-          count: state.count + 1,
+          count: state.count + action.payload,
         }
       case 'decrement':
         return {
           ...state,
-          count: state.count - 1,
+          count: state.count - action.payload,
         }
       default:
         return state
@@ -39,12 +39,14 @@ const store = createStore(
 q('.actions > .increment').addEventListener('click', () => {
   store.dispatch({
     type: 'increment',
+    payload: getInputValue(),
   })
 })
 
 q('.actions > .decrement').addEventListener('click', () => {
   store.dispatch({
     type: 'decrement',
+    payload: getInputValue(),
   })
 })
 
@@ -59,4 +61,8 @@ function writeStateToDom() {
 
 function q(id: string): HTMLElement {
   return document.querySelector(id) as HTMLElement
+}
+
+function getInputValue(): number {
+  return parseInt((q('#input-value') as HTMLInputElement).value)
 }

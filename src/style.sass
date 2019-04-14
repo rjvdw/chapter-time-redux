@@ -15,23 +15,31 @@ body
   margin: 2rem auto
   padding: 0
 
-  button
+  button, input
     border: 0
     border-radius: .5rem
     outline: 0
-    background: #aaa
-    color: #333
     padding: .5rem 1rem
     font-size: 24px
-    cursor: pointer
     display: inline-block
+
+    + button, + input
+      margin-left: 1rem
+
+  input
+    border: 2px solid #333
+    background: #fff
+    color: #111
+    text-align: right
+
+  button
+    background: #aaa
+    color: #333
+    cursor: pointer
     position: relative
     top: -2px
     left: -2px
     box-shadow: 4px 4px .5rem rgba(0, 0, 0, 0.8)
-
-    + button
-      margin-left: 1rem
 
     &.increment
       background: seagreen

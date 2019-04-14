@@ -10,7 +10,7 @@ const paths = {
   DIST: path.resolve(__dirname, 'dist'),
 }
 
-const PUBLIC_URL = '/fourier/'
+const PUBLIC_URL = '/'
 
 module.exports = {
   entry: path.resolve(paths.SRC, 'main.ts'),

@@ -6,13 +6,13 @@ const INITIAL_STATE: StateType = {
   name: null,
 }
 
-type SetUserName = { type: 'set-user-name', payload: string }
+type SetUserName = { type: 'chapter-time/user/set-user-name', payload: string }
 
 type ActionType = SetUserName
 
 export default function reducer(state: StateType = INITIAL_STATE, action: ActionType): StateType {
   switch (action.type) {
-    case 'set-user-name':
+    case 'chapter-time/user/set-user-name':
       return {
         ...state,
         name: action.payload,
@@ -24,7 +24,7 @@ export default function reducer(state: StateType = INITIAL_STATE, action: Action
 
 export function setUserName(to: string): SetUserName {
   return {
-    type: 'set-user-name',
+    type: 'chapter-time/user/set-user-name',
     payload: to,
   }
 }

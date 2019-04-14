@@ -3,17 +3,28 @@ import './style.sass'
 
 // Definitie van de state
 type StateType = {
-  count: number,
+  counter: {
+    count: number,
+  },
+  user: {
+    name: string | null,
+  },
 }
 const INITIAL_STATE: StateType = {
-  count: 0,
+  counter: {
+    count: 0,
+  },
+  user: {
+    name: null,
+  },
 }
 
 // Definities van de mogelijke acties
 type IncrementAction = { type: 'increment', payload: number }
 type DecrementAction = { type: 'decrement', payload: number }
+type SetUserName = { type: 'set-user-name', payload: string }
 
-type ActionType = IncrementAction | DecrementAction
+type ActionType = IncrementAction | DecrementAction | SetUserName
 
 // Opzetten store
 const store = createStore(
@@ -22,12 +33,26 @@ const store = createStore(
       case 'increment':
         return {
           ...state,
-          count: state.count + action.payload,
+          counter: {
+            ...state.counter,
+            count: state.counter.count + action.payload,
+          },
         }
       case 'decrement':
         return {
           ...state,
-          count: state.count - action.payload,
+          counter: {
+            ...state.counter,
+            count: state.counter.count - action.payload,
+          },
+        }
+      case 'set-user-name':
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            name: action.payload,
+          },
         }
       default:
         return state
@@ -47,6 +72,15 @@ q('.actions > .decrement').addEventListener('click', () => {
   store.dispatch({
     type: 'decrement',
     payload: getInputValue(),
+  })
+})
+
+q('#user-name').addEventListener('input', event => {
+  const target = event.target as HTMLInputElement
+
+  store.dispatch({
+    type: 'set-user-name',
+    payload: target.value,
   })
 })
 
